@@ -1,50 +1,179 @@
+/* Переменные CSS для общих значений цветов */
+:root {
+  --primary-color: #4CAF50;
+  --primary-hover-color: #45a049;
+  --primary-active-color: #3e8e41;
+  --modal-bg-color: rgba(0, 0, 0, 0.5);
+  --message-bg-color: rgba(0, 0, 0, 0.7);
+  --modal-content-bg-color: #fefefe;
+  --button-danger-bg-color: #f44336;
+  --button-danger-hover-color: #e53935;
+}
+
+/* Общие стили */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #f4f4f9;
   color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+  padding: 0;
 }
 
 #game-container {
-  background-color: white;
   padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: white;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
-}
-
-#resources {
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
+/* Стили для кнопок */
 button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: var(--primary-hover-color);
+}
+
+button:active {
+  background-color: var(--primary-active-color);
+}
+
+/* Сообщение внизу экрана */
+#message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--message-bg-color);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  font-size: 16px;
+}
+
+/* Стиль для отображения HP игрока */
+#player-health {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Модальное окно смерти */
+#deathModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-bg-color);
+  padding-top: 60px;
+}
+
+/* Содержимое модального окна */
+#deathModal .modal-content {
+  background-color: var(--modal-content-bg-color);
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
+}
+
+/* Кнопки в модальном окне */
+#deathModal button {
   width: 100%;
   padding: 10px;
   margin: 5px 0;
-  background-color: #4CAF50;
+  background-color: var(--button-danger-bg-color);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #45a049;
+#deathModal button:hover {
+  background-color: var(--button-danger-hover-color);
 }
 
+/* Стиль для инвентаря */
 #inventory {
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+#inventory h3 {
+  font-size: 18px;
 }
 
 #inventory-list {
   list-style-type: none;
   padding: 0;
+}
+
+#inventory-list li {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+/* Стиль для ресурсов */
+#resources p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Стиль для кнопок инвентаря */
+#actions {
+  margin-top: 20px;
+}
+
+#actions button {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+#actions button:hover {
+  background-color: var(--primary-hover-color);
+}
+
+#actions button:active {
+  background-color: var(--primary-active-color);
+}
+
+/* Анимация атаки */
+.attack-animation {
+  animation: attack 1s ease-in-out;
+}
+
+@keyframes attack {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }

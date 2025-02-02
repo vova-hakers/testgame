@@ -72,6 +72,42 @@
       50% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
+    
+    /* Модальное окно смерти */
+    #deathModal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding-top: 60px;
+    }
+
+    #deathModal .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    #deathModal button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #deathModal button:hover {
+      background-color: #e53935;
+    }
   </style>
 </head>
 <body>
@@ -93,9 +129,9 @@
       <button onclick="gatherResource('wood')">Собрать дерево</button>
       <button onclick="gatherResource('stone')">Собрать камень</button>
       <button onclick="gatherResource('iron')">Собрать железо</button>
-      <button onclick="craftTool()">Создать кирку</button>
-      <button onclick="craftSword()">Создать меч</button>
-      <button onclick="craftArmor()">Создать броню</button>
+      <button onclick="craftItem('pickaxe')">Создать кирку</button>
+      <button onclick="craftItem('sword')">Создать меч</button>
+      <button onclick="craftItem('armor')">Создать броню</button>
       <button onclick="showInventory()">Проверить инвентарь</button>
       <button onclick="fightMonster()">Сразиться с монстром</button>
     </div>
@@ -108,11 +144,12 @@
     <button onclick="exitGame()">Выйти из игры</button>
   </div>
 
-  <!-- Модальное окно -->
-  <div id="myModal">
+  <!-- Модальное окно смерти -->
+  <div id="deathModal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <p>Вы срубили дерево!</p>
+      <p>Вы погибли!</p>
+      <button id="restartButton">Возродиться</button>
+      <button id="exitButton">Выйти из игры</button>
     </div>
   </div>
 
