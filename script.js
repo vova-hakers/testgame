@@ -7,6 +7,7 @@ let resources = {
 
 let playerHealth = 100;  // Здоровье игрока
 let monsterHealth = 30;  // Здоровье монстра
+let inventory = [];      // Инвентарь игрока
 
 // Функция для сбора ресурсов
 function gatherResource(resource) {
@@ -59,7 +60,6 @@ function closeModal() {
 
 // Функция для создания кирки
 function craftTool() {
-  // Пример: создаем кирку, если есть достаточно ресурсов
   if (resources.wood >= 3 && resources.stone >= 2) {
     resources.wood -= 3;
     resources.stone -= 2;
@@ -70,27 +70,43 @@ function craftTool() {
   }
 }
 
+// Функция для создания меча
+function craftSword() {
+  if (resources.iron >= 3 && resources.wood >= 2) {
+    resources.iron -= 3;
+    resources.wood -= 2;
+    inventory.push("Меч");
+    updateResourceDisplay();
+    showMessage("Вы создали меч!");
+  } else {
+    showMessage("Недостаточно ресурсов для создания меча.");
+  }
+}
+
+// Функция для создания брони
+function craftArmor() {
+  if (resources.iron >= 5 && resources.wood >= 3) {
+    resources.iron -= 5;
+    resources.wood -= 3;
+    inventory.push("Броня");
+    updateResourceDisplay();
+    showMessage("Вы создали броню!");
+  } else {
+    showMessage("Недостаточно ресурсов для создания брони.");
+  }
+}
+
 // Функция для показа инвентаря
 function showInventory() {
   var inventoryList = document.getElementById('inventory-list');
   inventoryList.innerHTML = '';
   
   // Добавляем элементы в инвентарь
-  if (resources.wood > 0) {
+  inventory.forEach(item => {
     var li = document.createElement('li');
-    li.textContent = `Дерево: ${resources.wood}`;
+    li.textContent = item;
     inventoryList.appendChild(li);
-  }
-  if (resources.stone > 0) {
-    var li = document.createElement('li');
-    li.textContent = `Камень: ${resources.stone}`;
-    inventoryList.appendChild(li);
-  }
-  if (resources.iron > 0) {
-    var li = document.createElement('li');
-    li.textContent = `Железо: ${resources.iron}`;
-    inventoryList.appendChild(li);
-  }
+  });
 }
 
 // Функция для сражения с монстром
