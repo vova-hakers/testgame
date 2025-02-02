@@ -9,6 +9,10 @@ let playerHealth = 100;  // Здоровье игрока
 let monsterHealth = 30;  // Здоровье монстра
 let inventory = [];      // Инвентарь игрока
 
+// Флаги для наличия оружия и брони
+let hasSword = false;
+let hasArmor = false;
+
 // Функция для сбора ресурсов
 function gatherResource(resource) {
   if (resource === 'wood') {
@@ -32,6 +36,8 @@ function updateResourceDisplay() {
   document.getElementById('stone').textContent = resources.stone;
   document.getElementById('iron').textContent = resources.iron;
   document.getElementById('health').textContent = playerHealth;
+  document.getElementById('sword').textContent = hasSword ? "Меч: Есть" : "Меч: Нет";
+  document.getElementById('armor').textContent = hasArmor ? "Броня: Есть" : "Броня: Нет";
 }
 
 // Функция для показа сообщения внизу экрана
@@ -75,6 +81,7 @@ function craftSword() {
   if (resources.iron >= 3 && resources.wood >= 2) {
     resources.iron -= 3;
     resources.wood -= 2;
+    hasSword = true; // Игрок теперь имеет меч
     inventory.push("Меч");
     updateResourceDisplay();
     showMessage("Вы создали меч!");
@@ -88,6 +95,7 @@ function craftArmor() {
   if (resources.iron >= 5 && resources.wood >= 3) {
     resources.iron -= 5;
     resources.wood -= 3;
+    hasArmor = true; // Игрок теперь имеет броню
     inventory.push("Броня");
     updateResourceDisplay();
     showMessage("Вы создали броню!");
@@ -113,6 +121,16 @@ function showInventory() {
 function fightMonster() {
   let damageToMonster = Math.floor(Math.random() * 15) + 5; // Урон монстру от игрока
   let damageToPlayer = Math.floor(Math.random() * 10) + 3;  // Урон игроку от монстра
+
+  // Если у игрока есть меч, увеличиваем урон по монстру
+  if (hasSword) {
+    damageToMonster += 5;  // Меч дает бонусный урон
+  }
+
+  // Если у игрока есть броня, уменьшаем получаемый урон
+  if (hasArmor) {
+    damageToPlayer = Math.max(damageToPlayer - 3, 0);  // Броня уменьшает урон, но не дает уйти в минус
+  }
 
   // Монстр получает урон
   monsterHealth -= damageToMonster;
