@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Текстовая игра Minecraft</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <h1>Текстовая игра Minecraft</h1>
+    <p>Ты находишься в случайно сгенерированном мире. Твоя цель - собирать ресурсы и создавать предметы.</p>
+    
+    <div id="resources">
+      <p>Дерево: <span id="wood">0</span></p>
+      <p>Камень: <span id="stone">0</span></p>
+      <p>Железо: <span id="iron">0</span></p>
+    </div>
+
+    <div id="actions">
+      <button onclick="gatherResource('wood')">Собрать дерево</button>
+      <button onclick="gatherResource('stone')">Собрать камень</button>
+      <button onclick="gatherResource('iron')">Собрать железо</button>
+      <button onclick="craftTool()">Создать кирку</button>
+      <button onclick="showInventory()">Проверить инвентарь</button>
+    </div>
+
+    <div id="inventory">
+      <h3>Инвентарь:</h3>
+      <ul id="inventory-list"></ul>
+    </div>
+
+    <button onclick="exitGame()">Выйти из игры</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
