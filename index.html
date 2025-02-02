@@ -55,13 +55,34 @@
       border-radius: 5px;
       display: none;
     }
+
+    /* Стиль для отображения HP игрока */
+    #player-health {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    /* Стиль для анимации атаки */
+    .attack-animation {
+      animation: attack 1s ease-in-out;
+    }
+
+    @keyframes attack {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 <body>
   <div id="game-container">
     <h1>Текстовая игра Minecraft</h1>
-    <p>Ты находишься в случайно сгенерированном мире. Твоя цель - собирать ресурсы и создавать предметы.</p>
+    <p>Ты находишься в случайно сгенерированном мире. Твоя цель - собирать ресурсы и сражаться с монстрами.</p>
     
+    <div id="player-health">
+      Здоровье игрока: <span id="health">100</span>
+    </div>
+
     <div id="resources">
       <p>Дерево: <span id="wood">0</span></p>
       <p>Камень: <span id="stone">0</span></p>
@@ -74,6 +95,7 @@
       <button onclick="gatherResource('iron')">Собрать железо</button>
       <button onclick="craftTool()">Создать кирку</button>
       <button onclick="showInventory()">Проверить инвентарь</button>
+      <button onclick="fightMonster()">Сразиться с монстром</button>
     </div>
 
     <div id="inventory">

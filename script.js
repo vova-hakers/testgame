@@ -1,9 +1,12 @@
-// Изначальные ресурсы
+// Изначальные ресурсы и параметры игрока
 let resources = {
   wood: 0,
   stone: 0,
   iron: 0
 };
+
+let playerHealth = 100;  // Здоровье игрока
+let monsterHealth = 30;  // Здоровье монстра
 
 // Функция для сбора ресурсов
 function gatherResource(resource) {
@@ -22,11 +25,12 @@ function gatherResource(resource) {
   }
 }
 
-// Обновление отображения ресурсов
+// Обновление отображения ресурсов и здоровья
 function updateResourceDisplay() {
   document.getElementById('wood').textContent = resources.wood;
   document.getElementById('stone').textContent = resources.stone;
   document.getElementById('iron').textContent = resources.iron;
+  document.getElementById('health').textContent = playerHealth;
 }
 
 // Функция для показа сообщения внизу экрана
@@ -86,6 +90,34 @@ function showInventory() {
     var li = document.createElement('li');
     li.textContent = `Железо: ${resources.iron}`;
     inventoryList.appendChild(li);
+  }
+}
+
+// Функция для сражения с монстром
+function fightMonster() {
+  let damageToMonster = Math.floor(Math.random() * 15) + 5; // Урон монстру от игрока
+  let damageToPlayer = Math.floor(Math.random() * 10) + 3;  // Урон игроку от монстра
+
+  // Монстр получает урон
+  monsterHealth -= damageToMonster;
+
+  // Игрок получает урон
+  playerHealth -= damageToPlayer;
+
+  // Анимация атаки
+  document.body.classList.add('attack-animation');
+  setTimeout(() => document.body.classList.remove('attack-animation'), 1000);
+
+  // Обновление отображения здоровья
+  updateResourceDisplay();
+
+  // Проверка, кто победил
+  if (monsterHealth <= 0) {
+    showMessage("Вы победили монстра!");
+    monsterHealth = 30;  // Восстановить здоровье монстра для следующего сражения
+  } else if (playerHealth <= 0) {
+    showMessage("Вы погибли!");
+    playerHealth = 100;  // Восстановить здоровье игрока после поражения
   }
 }
 
